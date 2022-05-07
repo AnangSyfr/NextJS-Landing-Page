@@ -1,4 +1,5 @@
-const ButtonHeader = ({ className, variant, children, pill }) => {
+const ButtonHeader = (props) => {
+    const { className, variant, pill, children, withAction } = props;
     const addClassName = className ? ` ${className} ` : "";
     const variants = {
         "outline-yellow":
@@ -8,7 +9,18 @@ const ButtonHeader = ({ className, variant, children, pill }) => {
     };
     const pickedVariant = variants[variant];
     const pilled = pill ? "rounded-full" : "";
-    return (
+    // console.log(action);
+    const handleClick = () => {
+        props.showPopUp();
+    };
+    return withAction ? (
+        <a
+            className={`transition cursor-pointer py-3 px-10 font-semibold text-lg  inline-block ${pilled} ${pickedVariant} ${addClassName}`}
+            onClick={handleClick}
+        >
+            {children}
+        </a>
+    ) : (
         <a
             className={`transition cursor-pointer py-3 px-10 font-semibold text-lg  inline-block ${pilled} ${pickedVariant} ${addClassName}`}
         >
